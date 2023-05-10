@@ -71,6 +71,7 @@ func sum(w http.ResponseWriter, r *http.Request) {
 	result, err := redis.StringMap(conn.Do("brpop", replyAddress, timeToLive))
 	if err != nil {
 		fmt.Fprintln(w, "Error during reading reply Queue", err)
+		return
 	}
 
 	for _, v := range result {
